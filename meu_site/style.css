@@ -1,0 +1,31 @@
+h1 {
+    color: #7bd7ff;
+    font-size: 42px;
+}
+
+h2 {
+    color: #8fffda;
+}
+
+p {
+    color: #b9c4d8;
+}
+
+body {
+    background: #0f172a;
+    color: #e5e7eb;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 32px;
+    background: #111827;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px #0006;
+}
+
+strong {
+    color: #fae0c1;
+}
