@@ -1,0 +1,44 @@
+body {
+    background-color: #6a6a8f;
+}
+p {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    gap: 40px;
+}
+.card{
+    flex: 1;
+    max-width: 700px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px;
+    text-align: center;
+}
+.meu-portfolio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sobre-mim {
+    margin: 0 auto;
+    text-align: center;
+
+}
+.meus-projetos {
+    text-align: center;
+}
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    gap: 20px;
+}

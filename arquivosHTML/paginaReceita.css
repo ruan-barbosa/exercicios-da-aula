@@ -1,0 +1,43 @@
+body {
+    background-color: #503121;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.card {
+    background-color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px ;
+}
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+h3 {
+    margin-top: 30px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.texto-laranja {
+    color: #fd6107;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-content: center;   /* Opcional: alinha o conteúdo */
+  }
