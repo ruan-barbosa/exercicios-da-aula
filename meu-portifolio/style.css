@@ -1,26 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #6a6a8f;
+    background-color: #0f172a;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 p {
     text-align: center;
+    color: #e2e8f0;
 }
-
+h1 {
+    text-align: center;
+    color: #e2e8f0;
+}
 h2 {
     text-align: center;
+    color: #e2e8f0;
 }
 
+.foto-perfil  {
+    max-width: 200px;
+    border-radius: 50px;
+    margin: 30px auto 10px;
+    display: block
+}
 .cards {
     display: flex;
     gap: 40px;
+    color: #e2e8f0;
 }
 .card{
     flex: 1;
     max-width: 700px;
     margin: 10px;
     padding: 10px;
+    border: 1px solid #334155;
     border-radius: 12px;
-    box-shadow: 0 4px 15px;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
     text-align: center;
+    transition: 0.3s;
+}
+.card:hover {
+    background-color: #26166b;
+    transform: scale(1.05);
 }
 .meu-portfolio {
     display: flex;
@@ -41,4 +64,10 @@ nav ul{
     list-style: none;
     padding: 0;
     gap: 20px;
+    text-decoration: none;
+}
+nav a {
+  color: #7dd3fc;
+  text-decoration: none;
+  font-weight: 600;
 }
