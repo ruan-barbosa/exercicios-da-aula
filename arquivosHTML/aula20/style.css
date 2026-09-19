@@ -1,3 +1,4 @@
+/*Config geral das páginas*/
 body {
     min-height: 100vh;
     display: flex;
@@ -21,6 +22,9 @@ footer {
     margin-left: 20px;
     color: white;
 }
+.cabecalho h1:hover {
+    color: #10d410;
+}
 nav ul{
     display: flex;
     align-items: center;
@@ -32,43 +36,83 @@ nav a {
     color: white;
     text-decoration: none;
 }
-.sobre {
+nav a:hover {
+    color: #10d410;
+}
+.logo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-titulo img {
+    height: 50px; 
+    display: block;
+}
+
+/*Inicio*/
+.apresentacao {
     font-weight: normal;
     text-align: center;
-    margin: 50px;
+    margin: 50px 50px 30px;
 }
-.cards {
-    display: flex;
-    gap: 20px;
-    color: white;
+.cards-esportes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1600px; 
+    margin: 0 auto;
+    padding: 0 40px; 
 }
+
 .card {
-    flex: 1;
-    max-width: 700px;
-    margin: 10px;
-    margin-top: 100px;
-    padding: 10px;
-    padding-top: 20px;
+    position: relative;
+    width: 100%;
+    height: 350px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
     padding-bottom: 20px;
-    text-align: center;
-    border: 1px solid green;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    background-color: #1a5d1a;
-    transition: 0.5s;
+    transition: transform 0.3s ease;
 }
-.card:hover{
-    background-color: white;
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
+    z-index: 0;
+}
+
+.card:hover {
     transform: scale(1.05);
+}
+
+.card-futebol {
+    background-image: url('imagens/images.jpg');
+}
+
+.card-basquete {
+    background-image: url('imagens/basquete.jpg');
+}
+
+.card-volei {
+    background-image: url('imagens/volei.jpg');
 }
 .motivacao {
     text-align: center;
-    margin: 100px;
+    margin: 40px;
 }
-.btn-contato {
+.btn-contato-home {
     display: flex;
     max-width: 200px;
-    margin: 100px auto;
+    margin: 40px auto;
     padding: 15px 40px;
     justify-content: center;
     text-align: center;
@@ -80,11 +124,254 @@ nav a {
     background-color: #10d410;
     transition: 0.5s;
 }
-.btn-contato a {
+.btn-contato-home a {
     color: black;
     text-decoration: none;
 }
-.btn-contato:hover{
+.btn-contato-home:hover{
     background-color: white;
     transform: scale(1.05);
+}
+
+/*Serviços*/
+/*Serviços*/
+.tituloserv {
+    font-weight: normal;
+    text-align: center;
+    margin: 50px;
+}
+
+.servicos {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+.cards-servicos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.cardserv {
+    padding: 28px 20px;
+    text-align: center;
+    border: 1px solid green;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #1a5d1a;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.cardserv:hover {
+    background-color: white;
+    color: #1a5d1a;
+    transform: scale(1.05);
+}
+
+/*Contato*/
+.ctt {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.ctt h1 {
+    color: #1a5d1a;
+}
+
+.contato-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.form-contato {
+    flex: 2;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-contato label {
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    color: #1a5d1a;
+}
+
+.form-contato input,
+.form-contato textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.form-contato input:focus,
+.form-contato textarea:focus {
+    outline: none;
+    border-color: #1a5d1a;
+}
+
+.form-contato button {
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background-color: #10d410;
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-contato button:hover {
+    background-color: #1a5d1a;
+    color: white;
+    transform: scale(1.03);
+}
+
+.info-contato {
+    flex: 1;
+    min-width: 250px;
+    background-color: #1a5d1a;
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    height: fit-content;
+}
+
+.info-contato h2 {
+    margin-top: 0;
+}
+
+.info-contato p {
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.info-contato a {
+    color: #a8ffa8;
+    text-decoration: none;
+}
+
+.info-contato a:hover {
+    text-decoration: underline;
+}
+
+/*Sobre nós*/
+.sobre {
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.sobre h1 {
+    color: #1a5d1a;
+}
+
+.cards-valores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-valor {
+    background-color: #1a5d1a;
+    color: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card-valor h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+.card-valor p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.card-valor:hover {
+    background-color: white;
+    color: #1a5d1a;
+    transform: scale(1.05);
+}
+
+/*Depoimentos*/
+.depoimentos-lista {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.card-depoimento {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+.card-depoimento p {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+.card-depoimento .autor {
+    font-weight: bold;
+    color: #f4c430;
+}
+.card-depoimento .estrelas {
+    margin-top: 12px;
+    color: #f4c430;
+    font-size: 1.2rem;
+}
+
+/*FAQ*/
+.faq {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.faq h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    background-color: white;
+    border-left: 4px solid #1a5d1a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.faq-item h2 {
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+    color: #1a5d1a;
+}
+
+.faq-item p {
+    margin: 0;
+    color: #444;
 }
