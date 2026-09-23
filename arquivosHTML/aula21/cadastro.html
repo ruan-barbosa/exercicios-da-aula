@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container-central">
+        <section class="card-principal">
+            <form action="cadastro.php" method="POST" class="form-login">
+                <h1>Cadastro</h1>
+                <div class="campo">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Escolha um usuário" required>
+                </div>
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Escolha uma senha" required>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+        <div class="mudar-pagina"><a href="index.html">Início</a></div>
+    </main>
+</body>
+</html>
