@@ -27,15 +27,15 @@ try {
     $telefone = trim($_POST["telefone"] ?? "");
     $endereco = trim($_POST["endereco"] ?? "");
     $curso = trim($_POST["curso"] ?? "");
-    $turma = trim($_POST["nome"] ?? "");
+    $turma = trim($_POST["turma"] ?? "");
     
-    if ($cpf === "" || $nome === "" || $idade === "" || $email === "" || $telefone === "" || $endereco === "" || $curso == "" || $turma == "") {
+    if ($cpf === "" || $nome === "" || $idade === "" || $email === "" || $telefone === "" || $endereco === "" || $curso === "" || $turma === "") {
         echo "Preencha todos os campos";
         exit;
     }
     
-    $sql = "insert into alunos (nome, email, curso)
-            values (:cpf, :nome, :idade, :email, :telefone, :endereco, :curso, :turma)";
+    $sql = "insert into alunos (cpf, nome, idade, email, telefone, endereco, curso, turma)
+        values (:cpf, :nome, :idade, :email, :telefone, :endereco, :curso, :turma)";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -50,7 +50,7 @@ try {
     ]);
     
     echo "Aluno cadastrado com sucesso!";
-    echo '<br><a href="index.html">Ir para o login</a>';
+    echo '<br><a href="index.html">Ir para a tela inicial</a>';
     
 } catch (PDOException $erro) {
     echo "Erro: " . $erro->getMessage();

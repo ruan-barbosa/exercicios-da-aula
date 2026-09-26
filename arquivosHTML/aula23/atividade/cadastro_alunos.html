@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro de Aluno </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main class="card">
+            <h1>Cadastro de Aluno</h1>
+            <form action="salvar-alunos.php" method="POST">
+
+                <label for="cpf">CPF:</label>
+                <input id="cpf" name="cpf" type="text" required>
+
+                <label for="nome">Nome:</label>
+                <input id="nome" name="nome" type="text" required>
+
+                <label for="idade">Idade:</label>
+                <input id="idade" name="idade" type="text" required>
+
+                <label for="email">E-mail:</label>
+                <input id="email" name="email" type="email" required>
+
+                <label for="telefone">Telefone:</label>
+                <input id="telefone" name="telefone" type="text" required>
+
+                <label for="endereco">Endereço:</label>
+                <input id="endereco" name="endereco" type="text" required>
+
+                <label for="curso">Curso:</label>
+                <input id="curso" name="curso" type="text" required>
+
+                <label for="turma">Turma:</label>
+                <input id="turma" name="turma" type="text" required>
+        
+                <button type="submit">Cadastrar</button>
+
+                <br><a href="index.html" class="link-inicial">Ir para Página Inicial</a>
+
+            </form> 
+        </main>
+    </body>
+</html>

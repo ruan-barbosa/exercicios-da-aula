@@ -17,4 +17,13 @@ create table if not exists alunos (
     criado_em timestamp default current_timestamp
 );
 
+create table if not exists universidades (
+    id_uni int auto_increment primary key,
+	nome varchar(100) not null,
+    endereco varchar(100) not null,
+    cnpj varchar(14) not null,
+	telefone varchar(12) not null
+);
+
 select * from alunos;
+select * from universidades;

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro de Aluno </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main class="card">
+            <h1>Cadastro de Universidade</h1>
+            <form action="salvar-uni.php" method="POST">
+
+                <label for="nome">Nome:</label>
+                <input id="nome" name="nome" type="text" required>
+
+                <label for="endereco">Endereço:</label>
+                <input id="endereco" name="endereco" type="text" required>
+
+                <label for="cnpj">CNPJ:</label>
+                <input id="cnpj" name="cnpj" type="text" required>
+
+                <label for="telefone">Telefone:</label>
+                <input id="telefone" name="telefone" type="text" required>
+        
+                <button type="submit">Cadastrar</button>
+
+                <br><a href="index.html" class="link-inicial">Ir para Página Inicial</a>
+
+            </form> 
+        </main>
+    </body>
+</html>
