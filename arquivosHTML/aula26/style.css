@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 24px;
+}
+
+.card {
+    width: 360px;
+    margin: 60px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px #0002;
+}
+
+.card-larga {
+    width: min(900px, calc(100% - 48px));
+}
+
+section {
+    margin-top: 28px;
+    padding-top: 8px;
+    border-top: 1px solid #ddd;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+}
+
+input,
+button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+button {
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}

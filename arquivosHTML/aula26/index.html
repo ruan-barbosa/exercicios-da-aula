@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Alunos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card card-larga">
+    <h1>CRUD de Alunos</h1>
+
+    <section>
+        <h2>Cadastrar</h2>
+        <form action="salvar.php" method="POST">
+            <label>Nome</label>
+            <input name="nome" type="text" required>
+
+            <label>Idade</label>
+            <input name="idade" type="number" min="1" required>
+
+            <label>Cidade</label>
+            <input name="cidade" type="text" required>
+
+            <label>E-mail</label>
+            <input name="email" type="email" required>
+
+            <label>Curso</label>
+            <input name="curso" type="text" required>
+
+            <label for="periodo">Período</label>
+            <select name="periodo" id="periodo" required>
+                <option value="">Selecione</option>
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Noite">Noite</option>
+            </select>
+
+            <button type="submit">Salvar</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Consultar</h2>
+        <form action="consultar.php" method="GET">
+            <label>ID (opcional)</label>
+            <input name="id" type="number" min="1">
+
+            <label for="busca-nome">Nome (opcional)</label>
+            <input id="busca-nome" name="nome" type="text">
+
+            <button type="submit">Consultar</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
