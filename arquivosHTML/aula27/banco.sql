@@ -31,4 +31,4 @@ create table if not exists avaliacoes (
     foreign key (filme_id) references filmes(id) on delete cascade,
     unique (usuario_id, filme_id), 
     check (nota between 0 and 5)
-    );
+);
