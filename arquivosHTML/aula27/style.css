@@ -1,12 +1,13 @@
-/* ===== Base ===== */
 :root {
-    --fundo: #f3f4f8;
-    --card: #ffffff;
-    --texto: #1f2430;
-    --texto-suave: #5d6475;
-    --borda: #dfe2ea;
-    --primaria: #3d5afe;
-    --perigo: #d64545;
+    --fundo: #080807;
+    --card: #131312;
+    --texto: #f2f1f1;
+    --texto-suave: #a3a299;
+    --borda: #2a2a26;
+    --primaria: #fbc111;
+    --primaria-clara: #ffd34d;
+    --sobre-primaria: #111111;
+    --perigo: #e5484d;
 }
 
 * {
@@ -22,6 +23,11 @@ body {
 }
 
 a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+a:hover {
     color: var(--primaria);
 }
 
@@ -29,14 +35,37 @@ h1, h2 {
     line-height: 1.2;
 }
 
+/* ===== Logo ===== */
+.logo {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.logo-header {
+    display: block;
+    height: 40px;
+    width: auto;
+}
+
 /* ===== Cabeçalho (index) ===== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 24px;
-    background: var(--card);
-    border-bottom: 1px solid var(--borda);
+    padding: 12px 24px;
+    background: #000;
+    border-bottom: 2px solid var(--primaria);
+    color: var(--texto);
+}
+
+header > a,
+header > span {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 /* ===== Conteúdo das páginas (index, filme) ===== */
@@ -44,6 +73,10 @@ main {
     max-width: 800px;
     margin: 0 auto;
     padding: 24px 16px 48px;
+}
+
+main h1 {
+    color: var(--texto);
 }
 
 /* ===== Telas de login e cadastro ===== */
@@ -63,7 +96,9 @@ main:has(> .card-principal) {
     padding: 28px;
     background: var(--card);
     border: 1px solid var(--borda);
+    border-top: 3px solid var(--primaria);
     border-radius: 10px;
+    box-shadow: 0 0 28px rgba(251, 193, 17, 0.08);
 }
 
 .form-login h1 {
@@ -73,6 +108,16 @@ main:has(> .card-principal) {
 
 .mudar-pagina {
     text-align: center;
+}
+
+.mudar-pagina a {
+    color: var(--primaria);
+    font-weight: 600;
+}
+
+.mudar-pagina a:hover {
+    color: var(--primaria-clara);
+    text-decoration: underline;
 }
 
 /* ===== Formulários ===== */
@@ -93,18 +138,29 @@ textarea {
     width: 100%;
     padding: 10px 12px;
     font: inherit;
-    color: inherit;
-    background: #fff;
+    color: var(--texto);
+    background: var(--fundo);
     border: 1px solid var(--borda);
     border-radius: 6px;
 }
 
+input::placeholder,
+textarea::placeholder {
+    color: var(--texto-suave);
+}
+
 input:focus,
-textarea:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primaria);
+    box-shadow: 0 0 0 3px rgba(251, 193, 17, 0.2);
+}
+
 button:focus-visible,
-.botao:focus-visible {
-    outline: 2px solid var(--primaria);
-    outline-offset: 1px;
+.botao:focus-visible,
+.botao-contorno:focus-visible {
+    outline: 2px solid var(--primaria-clara);
+    outline-offset: 2px;
 }
 
 textarea {
@@ -124,18 +180,38 @@ button,
     display: inline-block;
     padding: 10px 16px;
     font: inherit;
-    font-weight: 600;
-    color: #fff;
+    font-weight: 700;
+    color: var(--sobre-primaria);
     text-decoration: none;
     background: var(--primaria);
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
 }
 
 button:hover,
 .botao:hover {
-    opacity: 0.9;
+    color: var(--sobre-primaria);
+    background: var(--primaria-clara);
+    box-shadow: 0 0 14px rgba(251, 193, 17, 0.4);
+}
+
+.botao-contorno {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 6px;
+    font-weight: 700;
+    color: var(--primaria);
+    border: 2px solid var(--primaria);
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.botao-contorno:hover {
+    color: var(--sobre-primaria);
+    background: var(--primaria);
+    box-shadow: 0 0 14px rgba(251, 193, 17, 0.4);
 }
 
 .form-login button {
@@ -147,18 +223,14 @@ main form button {
 }
 
 .perigo {
+    color: #fff;
     background: var(--perigo);
 }
 
-.acoes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 12px 0;
-}
-
-.acoes form button {
-    margin-top: 0;
+.perigo:hover {
+    color: #fff;
+    background: #f06368;
+    box-shadow: 0 0 14px rgba(229, 72, 77, 0.45);
 }
 
 /* ===== Filmes e avaliações ===== */
@@ -168,6 +240,7 @@ main form button {
     padding: 16px;
     background: var(--card);
     border: 1px solid var(--borda);
+    border-left: 3px solid var(--primaria);
     border-radius: 8px;
 }
 
@@ -182,13 +255,53 @@ main form button {
     color: var(--texto-suave);
 }
 
+.filme p.nota,
+.avaliacao strong {
+    color: var(--primaria);
+    font-weight: 700;
+}
+
+/* ===== Pôster dos filmes ===== */
+.filme {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.poster {
+    width: 100px;
+    flex-shrink: 0;
+    border-radius: 6px;
+}
+
+.filme-info {
+    flex: 1;
+    min-width: 0;
+}
+
+footer {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--texto-suave);
+    border-top: 1px solid var(--borda);
+}
+
 /* ===== Celular ===== */
 @media (max-width: 480px) {
     header {
-        padding: 12px 16px;
+        padding: 10px 16px;
+    }
+
+    .logo-header {
+        height: 32px;
     }
 
     .card-principal {
         padding: 20px;
+    }
+
+    .poster {
+        width: 70px;
     }
 }

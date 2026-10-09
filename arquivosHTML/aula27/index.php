@@ -7,7 +7,22 @@ if (!isset($_SESSION["usuario_id"])) {
     exit;
 }
 
-$sql = "SELECT f.id, f.titulo, f.duracao, f.sinopse,
+require "sincronizar.php";
+
+$erroTmdb = "";
+$importados = (int)$pdo->query("SELECT COUNT(*) FROM filmes WHERE tmdb_id IS NOT NULL")->fetchColumn();
+
+if ($importados === 0) {
+    try {
+        if (sincronizar_filmes($pdo, 3) === 0) {
+            $erroTmdb = "Não foi possível importar filmes. Confira o token em config.php.";
+        }
+    } catch (Throwable $e) {
+        $erroTmdb = "Erro ao importar filmes: " . $e->getMessage();
+    }
+}
+
+$sql = "SELECT f.id, f.titulo, f.duracao, f.sinopse, f.poster,
                AVG(a.nota) AS media,
                COUNT(a.id) AS total
         FROM filmes f
@@ -18,21 +33,30 @@ $filmes = $pdo->query($sql)->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruview</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
-        <span>Olá, <?= htmlspecialchars($_SESSION["usuario_nome"]) ?></span>
-        <a href="logout.php">Sair</a>
+        <a href="index.php"><img src="img/logo.png" alt="Ruview" class="logo-header"></a>
+        <span>
+            Olá, <?= htmlspecialchars($_SESSION["usuario_nome"]) ?>
+            <a href="logout.php">Sair</a>
+        </span>
     </header>
 
     <main>
-        <h1>Filmes</h1>
-        <a href="adicionar_filme.php" class="botao">+ Adicionar</a>
+        <h3>Filmes</h3>
+
+        <?php if ($erroTmdb): ?>
+            <p><?= htmlspecialchars($erroTmdb) ?></p>
+        <?php endif; ?>
 
         <?php if (!$filmes): ?>
             <p>Nenhum filme cadastrado ainda.</p>
@@ -40,20 +64,32 @@ $filmes = $pdo->query($sql)->fetchAll();
 
         <?php foreach ($filmes as $f): ?>
             <article class="filme">
-                <h2><?= htmlspecialchars($f["titulo"]) ?></h2>
-                <p><?= (int)$f["duracao"] ?> min</p>
-                <p><?= htmlspecialchars($f["sinopse"]) ?></p>
-                <p>
-                    <?php if ($f["total"] > 0): ?>
-                        Nota: <?= number_format($f["media"], 1, ",", ".") ?>/5
-                        (<?= $f["total"] ?> avaliação(ões))
-                    <?php else: ?>
-                        Ainda sem avaliações
-                    <?php endif; ?>
-                </p>
-                <a href="filme.php?id=<?= (int)$f["id"] ?>">Ver / avaliar</a>
+                <?php if ($f["poster"]): ?>
+                    <img class="poster"
+                        src="https://image.tmdb.org/t/p/w185<?= htmlspecialchars($f["poster"]) ?>"
+                        alt="Pôster de <?= htmlspecialchars($f["titulo"]) ?>">
+                <?php endif; ?>
+
+                <div class="filme-info">
+                    <h2><?= htmlspecialchars($f["titulo"]) ?></h2>
+                    <p><?= (int)$f["duracao"] ?> min</p>
+                    <p><?= htmlspecialchars($f["sinopse"]) ?></p>
+                    <p class="nota">
+                        <?php if ($f["total"] > 0): ?>
+                            ★ <?= number_format($f["media"], 1, ",", ".") ?>/5
+                            (<?= $f["total"] ?> avaliação(ões))
+                        <?php else: ?>
+                            Ainda sem avaliações
+                        <?php endif; ?>
+                    </p>
+                    <a href="filme.php?id=<?= (int)$f["id"] ?>" class="botao-contorno">Ver / avaliar</a>
+                </div>
             </article>
         <?php endforeach; ?>
     </main>
+    <footer>
+        <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+    </footer>
 </body>
+
 </html>

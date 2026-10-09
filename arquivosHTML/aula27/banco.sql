@@ -12,10 +12,12 @@ create table if not exists usuario (
 );
 
 create table if not exists filmes (
-	id int primary key auto_increment not null,
+    id int primary key auto_increment not null,
     titulo varchar(150) not null,
-    duracao float not null,
-    sinopse text not null
+    duracao int not null,
+    sinopse text not null,
+    tmdb_id int unique null,
+    poster varchar(255) null
 );
 
 create table if not exists avaliacoes (

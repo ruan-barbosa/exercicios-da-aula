@@ -2,7 +2,10 @@
 session_start();
 require "conexao.php";
 
-if (!isset($_SESSION["usuario_id"])) { header("Location: login.html"); exit; }
+if (!isset($_SESSION["usuario_id"])) {
+    header("Location: login.html");
+    exit;
+}
 
 $id = (int)($_GET["id"] ?? 0);
 
@@ -16,7 +19,10 @@ $stmt = $pdo->prepare(
 $stmt->execute([$id]);
 $filme = $stmt->fetch();
 
-if (!$filme) { http_response_code(404); exit("Filme não encontrado."); }
+if (!$filme) {
+    http_response_code(404);
+    exit("Filme não encontrado.");
+}
 
 $stmt = $pdo->prepare("SELECT nota, comentario FROM avaliacoes WHERE usuario_id = ? AND filme_id = ?");
 $stmt->execute([$_SESSION["usuario_id"], $id]);
@@ -34,12 +40,15 @@ $avaliacoes = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($filme["titulo"]) ?> - Ruview</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
         <a href="index.php">← Voltar</a>
@@ -55,16 +64,7 @@ $avaliacoes = $stmt->fetchAll();
                 Ainda sem avaliações
             <?php endif; ?>
         </p>
-        
-        <div class="acoes">
-            <a href="editar_filme.php?id=<?= (int)$filme["id"] ?>" class="botao">Editar filme</a>
 
-            <form action="excluir_filme.php" method="POST"
-                onsubmit="return confirm('Excluir este filme e todas as avaliações dele?');">
-                <input type="hidden" name="id" value="<?= (int)$filme["id"] ?>">
-                <button type="submit" class="botao perigo">Excluir filme</button>
-            </form>
-        </div>
 
         <h2><?= $minha ? "Editar minha avaliação" : "Avaliar este filme" ?></h2>
         <form action="avaliar.php" method="POST">
@@ -72,13 +72,21 @@ $avaliacoes = $stmt->fetchAll();
 
             <label for="nota">Nota (0 a 5)</label>
             <input type="number" id="nota" name="nota" min="0" max="5" step="0.5"
-                   value="<?= $minha ? htmlspecialchars($minha["nota"]) : "" ?>" required>
+                value="<?= $minha ? htmlspecialchars($minha["nota"]) : "" ?>" required>
 
             <label for="comentario">Comentário</label>
             <textarea id="comentario" name="comentario" maxlength="500" rows="3"><?= $minha ? htmlspecialchars($minha["comentario"] ?? "") : "" ?></textarea>
 
             <button type="submit">Salvar avaliação</button>
         </form>
+
+        <?php if ($minha): ?>
+            <form action="excluir_avaliacao.php" method="POST"
+                onsubmit="return confirm('Excluir sua avaliação deste filme?');">
+                <input type="hidden" name="filme_id" value="<?= $id ?>">
+                <button type="submit" class="botao perigo">Excluir minha avaliação</button>
+            </form>
+        <?php endif; ?>
 
         <h2>Avaliações</h2>
         <?php foreach ($avaliacoes as $a): ?>
@@ -90,4 +98,5 @@ $avaliacoes = $stmt->fetchAll();
         <?php endforeach; ?>
     </main>
 </body>
+
 </html>
