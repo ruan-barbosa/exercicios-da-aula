@@ -10,7 +10,7 @@ if (!isset($_SESSION["usuario_id"])) {
 require "sincronizar.php";
 
 $erroTmdb = "";
-$importados = (int)$pdo->query("SELECT COUNT(*) FROM filmes WHERE tmdb_id IS NOT NULL")->fetchColumn();
+$importados = (int) $pdo->query("SELECT COUNT(*) FROM filmes WHERE tmdb_id IS NOT NULL")->fetchColumn();
 
 if ($importados === 0) {
     try {
@@ -22,14 +22,19 @@ if ($importados === 0) {
     }
 }
 
+$busca = trim($_GET["q"] ?? "");
+
 $sql = "SELECT f.id, f.titulo, f.duracao, f.sinopse, f.poster,
                AVG(a.nota) AS media,
                COUNT(a.id) AS total
         FROM filmes f
         LEFT JOIN avaliacoes a ON a.filme_id = f.id
+        WHERE f.titulo LIKE ?
         GROUP BY f.id
         ORDER BY f.titulo";
-$filmes = $pdo->query($sql)->fetchAll();
+$stmt = $pdo->prepare($sql);
+$stmt->execute(["%" . addcslashes($busca, "%_\\") . "%"]);
+$filmes = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -54,25 +59,37 @@ $filmes = $pdo->query($sql)->fetchAll();
     <main>
         <h3>Filmes</h3>
 
+        <form method="get" class="busca">
+            <input type="search" name="q" value="<?= htmlspecialchars($busca) ?>" placeholder="Buscar filme pelo título"
+                aria-label="Buscar filme">
+            <button type="submit">Buscar</button>
+            <?php if ($busca !== ""): ?>
+                <a href="index.php" class="limpar">Limpar</a>
+            <?php endif; ?>
+        </form>
+
         <?php if ($erroTmdb): ?>
             <p><?= htmlspecialchars($erroTmdb) ?></p>
         <?php endif; ?>
 
         <?php if (!$filmes): ?>
-            <p>Nenhum filme cadastrado ainda.</p>
+            <p>
+                <?= $busca !== ""
+                    ? "Nenhum filme encontrado para \"" . htmlspecialchars($busca) . "\"."
+                    : "Nenhum filme cadastrado ainda." ?>
+            </p>
         <?php endif; ?>
 
         <?php foreach ($filmes as $f): ?>
             <article class="filme">
                 <?php if ($f["poster"]): ?>
-                    <img class="poster"
-                        src="https://image.tmdb.org/t/p/w185<?= htmlspecialchars($f["poster"]) ?>"
+                    <img class="poster" src="https://image.tmdb.org/t/p/w185<?= htmlspecialchars($f["poster"]) ?>"
                         alt="Pôster de <?= htmlspecialchars($f["titulo"]) ?>">
                 <?php endif; ?>
 
                 <div class="filme-info">
                     <h2><?= htmlspecialchars($f["titulo"]) ?></h2>
-                    <p><?= (int)$f["duracao"] ?> min</p>
+                    <p><?= (int) $f["duracao"] ?> min</p>
                     <p><?= htmlspecialchars($f["sinopse"]) ?></p>
                     <p class="nota">
                         <?php if ($f["total"] > 0): ?>
@@ -82,7 +99,7 @@ $filmes = $pdo->query($sql)->fetchAll();
                             Ainda sem avaliações
                         <?php endif; ?>
                     </p>
-                    <a href="filme.php?id=<?= (int)$f["id"] ?>" class="botao-contorno">Ver / avaliar</a>
+                    <a href="filme.php?id=<?= (int) $f["id"] ?>" class="botao-contorno">Ver / avaliar</a>
                 </div>
             </article>
         <?php endforeach; ?>

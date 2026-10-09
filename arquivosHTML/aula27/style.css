@@ -233,6 +233,26 @@ main form button {
     box-shadow: 0 0 14px rgba(229, 72, 77, 0.45);
 }
 
+.busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.busca input {
+    flex: 1;
+}
+
+main .busca button {
+    margin-top: 0;
+}
+
+.limpar {
+    color: var(--texto-suave);
+    white-space: nowrap;
+}
+
 /* ===== Filmes e avaliações ===== */
 .filme,
 .avaliacao {
